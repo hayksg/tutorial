@@ -1,4 +1,41 @@
 <?php
+
+/*class First
+{
+    public function hello($word, $name)
+    {
+        //return $word . ' ' . $name;
+        if (func_num_args() > 0) {
+            return func_get_arg(0) . ' ' . func_get_arg(1);
+        }
+    }
+}
+
+class Second
+{
+    private $first;
+
+    public function __construct(First $first)
+    {
+        $this->first = $first;
+    }
+
+    public function getFirst()
+    {
+        return $this->first;
+    }
+}
+
+//$second = new Second(new First());
+//echo $second->first->hello('Hello', 'Tommy');
+
+$di = new \Zend\Di\Di();
+$second = $di->get('Second');
+echo $second->getFirst()->hello('Hi', 'John');*/
+
+?>
+
+<?php
 $headTitle = 'Tutorial';
 $this->headTitle($headTitle);
 ?>
@@ -7,3 +44,4 @@ $this->headTitle($headTitle);
         <h3><?= $headTitle ?></h3>
     </div>
 </div>
+<div><?= $this->escapeHtml($this->greeting) ?></div>
