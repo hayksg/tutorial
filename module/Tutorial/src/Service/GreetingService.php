@@ -3,14 +3,26 @@
 namespace Tutorial\Service;
 
 use Tutorial\Service\GreetingServiceInterface;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\Event;
 
 class GreetingService implements GreetingServiceInterface
 {
+    private $eventManager;
+
     public function getGreeting()
     {
         date_default_timezone_set('Asia/Yerevan');
         $output = '';
         $hour = date('H');
+
+        $this->getEventManager()->setIdentifiers(['getGreetingIdentifier']);
+        $this->getEventManager()->trigger('getGreeting', $this, ['hour' => $hour]);
+
+        /*$event = new Event();
+        $event->setName(__FUNCTION__);
+        $event->setParams(['hour' => $hour]);
+        $this->getEventManager()->triggerEvent($event);*/
 
         if ($hour > 5 && $hour <= 11) {
             $output = 'Good morning';
@@ -23,5 +35,15 @@ class GreetingService implements GreetingServiceInterface
         }
 
         return $output;
+    }
+
+    public function setEventManager(EventManagerInterface $eventManager)
+    {
+        $this->eventManager = $eventManager;
+    }
+
+    public function getEventManager()
+    {
+        return $this->eventManager;
     }
 }
