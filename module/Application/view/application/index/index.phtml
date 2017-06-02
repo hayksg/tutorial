@@ -7,3 +7,9 @@ $this->headTitle($headTitle);
         <h3><?= $headTitle ?></h3>
     </div>
 </div>
+<div>
+    <?php
+        echo $this->flashMessenger()->render('success', ['success-message']);
+        echo $this->flashMessenger()->render('error',   ['error-message']);
+    ?>
+</div>

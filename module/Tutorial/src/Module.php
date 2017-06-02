@@ -41,6 +41,15 @@ class Module
         ];
     }
 
+    public function getControllerPluginConfig()
+    {
+        return [
+            'invokables' => [
+                'getDate' => Controller\Plugin\GetDate::class,
+            ],
+        ];
+    }
+
     /*public function init(ModuleManager $moduleManager)
     {
         $moduleManager->getEventManager()->getSharedManager()->attach(
