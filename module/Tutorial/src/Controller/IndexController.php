@@ -24,9 +24,14 @@ class IndexController extends AbstractActionController
             //$this->prg();
         }
 
-        return new ViewModel([
+        $widget = $this->forward()->dispatch(IndexCtr::class, ['action' => 'index']);
+
+        $view =  new ViewModel([
             'greeting' => $this->getGreetingService()->getGreeting(),
         ]);
+        $view->addChild($widget, 'widget');
+        //$view->setTemplate('tutorial/index/example2');
+        return $view;
     }
 
     public function setGreetingService(GreetingServiceInterface $greetingService)

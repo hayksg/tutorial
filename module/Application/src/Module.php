@@ -16,6 +16,7 @@ class Module
         return [
             'invokables' => [
                 'getYear' => View\Helper\GetYear::class,
+                'getTime' => View\Helper\GetTime::class,
             ],
         ];
     }
