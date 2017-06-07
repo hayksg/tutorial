@@ -1,0 +1,13 @@
+<?php
+$headTitle = 'Edit article';
+$this->headTitle($headTitle);
+?>
+<div class="row">
+    <div class="col-sm-12">
+        <h3><?= $headTitle ?></h3>
+    </div>
+</div>
+<form action="/article/edit/<?= $this->id ?>" method="post">
+    <input type="text" name="value">
+    <button>Submit</button>
+</form>

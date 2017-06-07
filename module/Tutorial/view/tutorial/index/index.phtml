@@ -47,6 +47,11 @@ $this->headTitle($headTitle);
 <div><?= $this->escapeHtml($this->greeting) ?></div>
 <div><a href="<?= $this->url('example') ?>">Example</a></div>
 <hr>
+<div><a href="/sample">Sample</a></div>
+<div><a href="/sample/article/14">Article Get</a></div>
+<hr>
+<div><a href="<?= $this->url('article') ?>">Article</a></div>
+<hr>
 <form action="tutorial" method="post">
     <input type="test" name="name">
     <button name="prg">Submit</button>

@@ -64,4 +64,39 @@ class IndexController extends AbstractActionController
             'date' => $this->getDate(),
         ];
     }
+
+    public function sampleAction()
+    {
+
+    }
+
+    /*public function articleAction()
+    {
+        $id = (int)$this->params()->fromRoute('id', 0);
+
+        return [
+            'id' => $id,
+        ];
+    }*/
+
+    public function getArticleAction()
+    {
+        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id', 0);
+        return [
+            'id' => $id,
+        ];
+    }
+
+    public function postArticleAction()
+    {
+        if ($this->request->isPost()) {
+            $id = (int)$this->getEvent()->getRouteMatch()->getParam('id', 0);
+            return [
+                'id' => $id,
+                'method' => 'post',
+            ];
+        }
+
+    }
+
 }

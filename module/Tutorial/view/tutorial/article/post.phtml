@@ -1,0 +1,11 @@
+<?php
+$headTitle = 'Post article';
+$this->headTitle($headTitle);
+?>
+<div class="row">
+    <div class="col-sm-12">
+        <h3><?= $headTitle ?></h3>
+    </div>
+</div>
+<div>ID: <?= $this->escapeHtml($this->id) ?></div>
+<div>Post value: <?= $this->escapeHtml($this->postValue) ?></div>

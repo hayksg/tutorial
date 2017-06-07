@@ -4,6 +4,8 @@ namespace Tutorial;
 
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
+use Zend\Router\Http\Regex;
+use Zend\Router\Http\Method;
 use Zend\ServiceManager\Factory\InvokableFactory;
 
 return [
@@ -29,11 +31,106 @@ return [
                     ],
                 ],
             ],
+            /*'sample' => [
+                'type' => Regex::class,
+                'options' => [
+                    'regex' => '/sample/(?<action>[a-z]*)/(?<id>[0-9]+)',
+                    'spec' => '/%action%/%id%',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'sample',
+                    ],
+                ],
+            ],*/
+            'sample' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route' => '/sample[/:action][/:id]',
+                    //'route' => '/sample',
+                    'constraints' => [
+                        'action' => '[a-z-]*',
+                        'id' => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        //'action'     => 'sample',
+                        'action'     => rand(0, 1) ? 'getArticle' : 'postArticle',
+                    ],
+                ],
+                //'may_terminate' => true,
+                'child_routes' => [
+                    'get' => [
+                        'type' => Method::class,
+                        'options' => [
+                            'verb' => 'get',
+                            'defaults' => [
+                                'controller' => Controller\IndexController::class,
+                                'action'     => 'getArticle',
+                            ],
+                        ],
+                    ],
+                    'post' => [
+                        'type' => Method::class,
+                        'options' => [
+                            'verb' => 'post',
+                            'defaults' => [
+                                'controller' => Controller\IndexController::class,
+                                'action'     => 'postArticle',
+                            ],
+                        ],
+                    ],
+
+                ],
+            ],
+            'article' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/article',
+                    'defaults' => [
+                        'controller' => Controller\ArticleController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+                'may_terminate' => true,
+            ],
+            'articleAction' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/article/edit[/:id]',
+                    'constraints'    => [
+                        'action' => '[a-z-]*',
+                        'id' => '[0-9]+',
+                    ],
+                ],
+                'child_routes' => [
+                    'get' => [
+                        'type' => Method::class,
+                        'options' => [
+                            'verb'    => 'get',
+                            'defaults' => [
+                                'controller' => Controller\ArticleController::class,
+                                'action'     => 'edit',
+                            ],
+                        ],
+                    ],
+                    'post' => [
+                        'type' => Method::class,
+                        'options' => [
+                            'verb'    => 'post',
+                            'defaults' => [
+                                'controller' => Controller\ArticleController::class,
+                                'action'     => 'post',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
             //Controller\IndexController::class => InvokableFactory::class,
+            Controller\ArticleController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [
