@@ -34,8 +34,8 @@ return [
             /*'sample' => [
                 'type' => Regex::class,
                 'options' => [
-                    'regex' => '/sample/(?<action>[a-z]*)/(?<id>[0-9]+)',
-                    'spec' => '/%action%/%id%',
+                    'regex'  => '/sample/(?<slug>[a-z]*)/(?<id>[0-9]+)',
+                    'spec'   => '%slug%%id%',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         'action'     => 'sample',
@@ -45,41 +45,16 @@ return [
             'sample' => [
                 'type' => Segment::class,
                 'options' => [
-                    'route' => '/sample[/:action][/:id]',
-                    //'route' => '/sample',
+                    'route'  => '/sample[/:slug[/:id]]',
                     'constraints' => [
-                        'action' => '[a-z-]*',
-                        'id' => '[0-9]+',
+                        'slug' => '[a-z0-9]*',
+                        'id'   => '[0-9]+',
                     ],
                     'defaults' => [
                         'controller' => Controller\IndexController::class,
                         //'action'     => 'sample',
-                        'action'     => rand(0, 1) ? 'getArticle' : 'postArticle',
+                        'action'     => rand(0, 1) ? 'foo' : 'bar',
                     ],
-                ],
-                //'may_terminate' => true,
-                'child_routes' => [
-                    'get' => [
-                        'type' => Method::class,
-                        'options' => [
-                            'verb' => 'get',
-                            'defaults' => [
-                                'controller' => Controller\IndexController::class,
-                                'action'     => 'getArticle',
-                            ],
-                        ],
-                    ],
-                    'post' => [
-                        'type' => Method::class,
-                        'options' => [
-                            'verb' => 'post',
-                            'defaults' => [
-                                'controller' => Controller\IndexController::class,
-                                'action'     => 'postArticle',
-                            ],
-                        ],
-                    ],
-
                 ],
             ],
             'article' => [
@@ -125,12 +100,56 @@ return [
                     ],
                 ],
             ],
+            'product' => [
+                'type' => Segment::class,
+                'options' => [
+                    'route'    => '/product',
+                    'defaults' => [
+                        'controller' => Controller\ProductController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+                //'may_terminate' => true,
+            ],
+            'productEditAction' => [
+                'type' => Segment::class,
+                'options' => [
+                    //'route'    => '/product[/:action[/:id]]',
+                    'route'    => '/product/edit[/:id]',
+                    'constraints' => [
+                        'id'     => '[0-9]+',
+                    ],
+                ],
+                'child_routes' => [
+                    'get' => [
+                        'type' => Method::class,
+                        'options' => [
+                            'verb'    => 'get',
+                            'defaults' => [
+                                'controller' => Controller\ProductController::class,
+                                'action'     => 'edit',
+                            ],
+                        ],
+                    ],
+                    'post' => [
+                        'type' => Method::class,
+                        'options' => [
+                            'verb'    => 'post',
+                            'defaults' => [
+                                'controller' => Controller\ProductController::class,
+                                'action'     => 'editPost',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ],
     ],
     'controllers' => [
         'factories' => [
             //Controller\IndexController::class => InvokableFactory::class,
             Controller\ArticleController::class => InvokableFactory::class,
+            Controller\ProductController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [

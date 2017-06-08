@@ -18,7 +18,6 @@ return [
             'home' => [
                 'type' => Literal::class,
                 'options' => [
-                    //'route'    => 'tutorial.loc',
                     'route'    => '/',
                     'defaults' => [
                         'controller' => Controller\IndexController::class,

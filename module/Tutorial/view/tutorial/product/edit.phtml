@@ -1,5 +1,5 @@
 <?php
-$headTitle = 'Get Article';
+$headTitle = 'Edit product';
 $this->headTitle($headTitle);
 ?>
 <div class="row">
@@ -7,8 +7,7 @@ $this->headTitle($headTitle);
         <h3><?= $headTitle ?></h3>
     </div>
 </div>
-<?= $this->escapeHtml($this->id) ?>
-<form action="/sample/article/<?= $this->id ?>" method="post">
+<form action="/product/edit/<?= $this->id ?>" method="post">
     <input type="text" name="value">
     <button>Submit</button>
 </form>

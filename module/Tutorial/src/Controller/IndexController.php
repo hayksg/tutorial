@@ -67,36 +67,21 @@ class IndexController extends AbstractActionController
 
     public function sampleAction()
     {
-
+        return [];
     }
 
-    /*public function articleAction()
+    public function fooAction()
     {
-        $id = (int)$this->params()->fromRoute('id', 0);
-
-        return [
-            'id' => $id,
-        ];
-    }*/
-
-    public function getArticleAction()
-    {
-        $id = (int)$this->getEvent()->getRouteMatch()->getParam('id', 0);
-        return [
-            'id' => $id,
-        ];
+        return [];
     }
 
-    public function postArticleAction()
+    public function barAction()
     {
-        if ($this->request->isPost()) {
-            $id = (int)$this->getEvent()->getRouteMatch()->getParam('id', 0);
-            return [
-                'id' => $id,
-                'method' => 'post',
-            ];
-        }
-
+        return [];
     }
+
+
+
+
 
 }

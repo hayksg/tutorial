@@ -1,5 +1,5 @@
 <?php
-$headTitle = 'Post Article';
+$headTitle = 'POST Product';
 $this->headTitle($headTitle);
 ?>
 <div class="row">
@@ -7,5 +7,5 @@ $this->headTitle($headTitle);
         <h3><?= $headTitle ?></h3>
     </div>
 </div>
-<div><?= $this->escapeHtml($this->id) ?></div>
-<div><?= $this->escapeHtml($this->method) ?></div>
+<div>ID: <?= $this->id ?></div>
+<div>Post value: <?= $this->escapeHtml($this->postValue) ?></div>
