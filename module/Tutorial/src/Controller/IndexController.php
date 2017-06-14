@@ -2,11 +2,13 @@
 
 namespace Tutorial\Controller;
 
+use Zend\Http\Header\SetCookie;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\Mvc\MvcEvent;
 use Zend\View\Model\ViewModel;
 use Tutorial\Service\GreetingServiceInterface;
 use Application\Controller\IndexController as IndexCtr;
+use Zend\Session\Container;
 
 class IndexController extends AbstractActionController
 {
@@ -58,6 +60,13 @@ class IndexController extends AbstractActionController
         //$errorMessage   = 'Error message';
         //$this->flashMessenger()->addErrorMessage($errorMessage);
         //return $this->redirect()->toRoute('home');
+
+        //$container = new Container('SomeMessage');
+        //$container->message = 'Some Message';
+
+        $cookie = new SetCookie('cookieMessage', 'Cookie message', time() + 3600 * 24 * 364, '/');
+        $this->getResponse()->getHeaders()->addHeader($cookie);
+        return $this->redirect()->toRoute('home');
 
         return [
             'url'  => $url,

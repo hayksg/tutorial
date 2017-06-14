@@ -1,4 +1,52 @@
 <?php
+
+//$str = ' q';
+
+/*$stripTags = new \Zend\Filter\StripTags();
+$str = $stripTags->filter($str);
+
+$stringTrim = new \Zend\Filter\StringTrim();
+$str = $stringTrim->filter($str);*/
+
+/*$stringLengthValidator = new \Zend\Validator\StringLength(['min' => 2, 'max' => 5]);
+$stringLengthValidator->setMessages([
+    \Zend\Validator\StringLength::TOO_SHORT => 'Too short',
+    \Zend\Validator\StringLength::TOO_LONG  => 'Too long',
+]);
+
+$alphaValidator = new \Zend\I18n\Validator\Alpha();
+$alphaValidator->setMessages([
+    \Zend\I18n\Validator\Alpha::NOT_ALPHA => 'Not ALPHA',
+]);
+
+$validatorChain = new Zend\Validator\ValidatorChain();
+$validatorChain->attach($stringLengthValidator);
+$validatorChain->attach($alphaValidator);
+
+if ($validatorChain->isValid($str)) {
+    echo 'Ok';
+} else {
+    foreach ($validatorChain->getMessages() as $message) {
+        echo "<div>{$message}</div>";
+    }
+}*/
+
+$value = 10;
+
+$floatValidator = new \Tutorial\Validator\FloatValidator();
+
+if ($floatValidator->isValid($value)) {
+    echo 'OK';
+} else {
+    foreach ($floatValidator->getMessages() as $message) {
+        echo "<div>{$message}</div>";
+    }
+}
+
+?>
+
+
+<?php
 $headTitle = 'Home page';
 $this->headTitle($headTitle);
 ?>
@@ -14,3 +62,8 @@ $this->headTitle($headTitle);
     ?>
 </div>
 <p><?= $this->getTime() ?></p>
+<br>
+<div class="color-red"><?= $this->escapeHtml($this->message) ?></div>
+<hr>
+<div><a href="/download">Download image</a></div>
+
